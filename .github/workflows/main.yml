@@ -1,4 +1,4 @@
-name: <Workflow's purpose>
+name: ai-cfia workflows
 
 on:
   push:
@@ -8,6 +8,8 @@ jobs:
   my_job:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
       - name: workflow-build-container
         uses: ai-cfia/github-workflows/.github/workflows/workflow-build-container.yml@main
         with: # to pass inputs to called workflow
