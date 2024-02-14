@@ -8,25 +8,25 @@ on:
       - synchronize
 
 jobs:
-  workflow7:  
+  python-lint:  
     name: workflow-lint-test-python
     uses: ai-cfia/github-workflows/.github/workflows/workflow-lint-test-python.yml@main
     with: # to pass inputs to called workflow
         input: value
     secrets: inherit
-  workflow8:
+  mkd-check:
     name: workflow-markdown-check
     uses: ai-cfia/github-workflows/.github/workflows/workflow-markdown-check.yml@main
     with: # to pass inputs to called workflow
       config-file-path: '.mlc_config.json'
     secrets: inherit
-  workflow9:
+  repo-validation:
     name: workflow-repo-standards-validation
     uses: ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@main
     with: # to pass inputs to called workflow
         input: value
     secrets: inherit
-  workflow12:
+  yaml-check:
     name: workflow-yaml-check
     uses: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
     with: # to pass inputs to called workflow
