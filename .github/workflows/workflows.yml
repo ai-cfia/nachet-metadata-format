@@ -25,8 +25,4 @@ jobs:
   yaml-check:
     name: workflow-yaml-check
     uses: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
-    with: # to pass inputs to called workflow
-      container-name: ${{ github.event.repository.name }}
-      tag: ${{ github.sha }}
-      registry: ghcr.io/ai-cfia
     secrets: inherit
