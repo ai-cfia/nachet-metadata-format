@@ -11,8 +11,6 @@ jobs:
   python-lint:  
     name: workflow-lint-test-python
     uses: ai-cfia/github-workflows/.github/workflows/workflow-lint-test-python.yml@main
-    with: # to pass inputs to called workflow
-        input: value
     secrets: inherit
   mkd-check:
     name: workflow-markdown-check
