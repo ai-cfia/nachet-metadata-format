@@ -21,8 +21,6 @@ jobs:
   repo-validation:
     name: workflow-repo-standards-validation
     uses: ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@main
-    with: # to pass inputs to called workflow
-        input: value
     secrets: inherit
   yaml-check:
     name: workflow-yaml-check
