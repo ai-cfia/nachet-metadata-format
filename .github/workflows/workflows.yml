@@ -30,7 +30,7 @@ jobs:
     name: workflow-yaml-check
     uses: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
  # I need to add the extends part to change the max line length
-    with:
+    input:
       config-file-path: ai-cfia/github-workflows/.yamllint.ymll@main
     secrets: inherit
             
