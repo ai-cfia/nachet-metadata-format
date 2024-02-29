@@ -8,6 +8,7 @@ on:
       - closed
       - synchronize
 
+
 jobs:
   python-lint:  
     name: workflow-lint-test-python
@@ -25,5 +26,14 @@ jobs:
     secrets: inherit
   yaml-check:
     name: workflow-yaml-check
+    #runs-on: ubuntu-latest
+    # steps:
+    #   - name: yaml-lint
+    #     run: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
+    #   - name: extension-lint
+    #     run: github-workflows/.yamllint.yml@main
     uses: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
+  # I need to add the extends part to change the max line length
+    with:
+      config-file-path: 'github-workflows/.yamllint.yml'
     secrets: inherit
