@@ -24,14 +24,12 @@ jobs:
     name: workflow-repo-standards-validation
     uses: ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@main
     secrets: inherit
-  # This job wat modified to use the default yamllint configuration
-  # We needed to change the config of the main 
   yaml-check:
     name: workflow-yaml-check
     uses: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
  # I need to add the extends part to change the max line length
     with:
-      config-file-path: 'ai-cfia/github-workflows/.yamllint.yml@main'
+      config-file-path: ai-cfia/github-workflows/.yamllint.yml@main
     secrets: inherit
     
             
