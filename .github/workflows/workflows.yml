@@ -24,16 +24,53 @@ jobs:
     name: workflow-repo-standards-validation
     uses: ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@main
     secrets: inherit
+  # This job wat modified to use the default yamllint configuration
+  # We needed to change the config of the main 
+  # yaml-check:
+  #   name: workflow-yaml-check
+  #   #runs-on: ubuntu-latest
+  #   # steps:
+  #   #   - name: yaml-lint
+  #   #     run: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
+  #   #   - name: extension-lint
+  #   #     run: github-workflows/.yamllint.yml@main
+  #   uses: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
+  # # I need to add the extends part to change the max line length
+  #   with:
+  #     config-file-path: 'github-workflows/.yamllint.yml'
+  #   secrets: inherit
   yaml-check:
-    name: workflow-yaml-check
-    #runs-on: ubuntu-latest
-    # steps:
-    #   - name: yaml-lint
-    #     run: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
-    #   - name: extension-lint
-    #     run: github-workflows/.yamllint.yml@main
-    uses: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
-  # I need to add the extends part to change the max line length
-    with:
-      config-file-path: 'github-workflows/.yamllint.yml'
-    secrets: inherit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get changed files
+        id: files
+        uses: lots0logs/gh-action-get-changed-files@2.2.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Lint YAML files
+        run: |
+          files=$(echo '${{ steps.files.outputs.all }}' | jq -r '.[]')
+          for file in $files; do
+            if [[ $file == *.yml || $file == *.yaml ]]; then
+              # Check if a custom config path is provided and file exists
+              if [ -n "${{ github.event.inputs.config-file-path }}" ]; then
+                yamllint -c "${{ github.workspace }}/${{ github.event.inputs.config-file-path }}" "$file"
+              else
+                yamllint "$file"
+              fi
+            fi
+          done
+        shell: bash
+        extends: default
+        rules:
+          # 80 chars should be enough, but don't fail if a line is longer
+          line-length:
+            max: 100
+            level: Error
