@@ -10,14 +10,14 @@ on:
 
 
 jobs:
-  python-lint:  
+  python-lint:
     name: workflow-lint-test-python
     uses: ai-cfia/github-workflows/.github/workflows/workflow-lint-test-python.yml@main
     secrets: inherit
   mkd-check:
     name: workflow-markdown-check
     uses: ai-cfia/github-workflows/.github/workflows/workflow-markdown-check.yml@main
-    with: # to pass inputs to called workflow
+    with:  # to pass inputs to called workflow
       config-file-path: '.mlc_config.json'
     secrets: inherit
   repo-validation:
@@ -27,7 +27,5 @@ jobs:
   yaml-check:
     name: workflow-yaml-check
     uses: ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
- # I need to add the extends part to change the max line length
+  # I need to add the extends part to change the max line length
     secrets: inherit
-    
-            
