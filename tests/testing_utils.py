@@ -1,7 +1,4 @@
 import os
-import dotenv
-
-dotenv.load_dotenv()
 
 def raise_error(message):
     raise Exception(message)
