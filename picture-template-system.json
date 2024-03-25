@@ -1,0 +1,22 @@
+{
+"info":{  
+  "uploadDate": "",
+  "userID": "",
+  "indexID": ""
+},
+"imageData":{
+  "parent": "",
+  "source": "",
+  "format": "",
+  "height": "",
+  "width": "",
+  "resolution": ""
+},
+"qualityCheck":{
+  "imageChecksum": "",
+  "uploadCheck": "",
+  "validData": "",
+  "errorType": "",
+  "dataQualityScore": ""
+ }
+}
