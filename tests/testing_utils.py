@@ -1,8 +1,5 @@
 import os
 
-def raise_error(message):
-    raise Exception(message)
-
 class EnvironmentVariableError(Exception):
     pass
 
